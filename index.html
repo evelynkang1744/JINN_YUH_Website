@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>進鈺有限公司 JINN YUH | 產品展示與技術支援</title>
     
-    <!-- 核心套件 CDN (進鈺網頁2 最終整合配置) -->
+    <!-- 核心套件 CDN (進鈺網頁2 整合配置) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -34,8 +34,7 @@
         .animate-marquee { animation: marquee 35s linear infinite; }
         .marquee-container:hover .animate-marquee { animation-play-state: paused; }
 
-        /* 垂直與水平文字類別 */
-        .writing-vertical { writing-mode: vertical-lr; }
+        /* 排版輔助類別 */
         .writing-horizontal { writing-mode: horizontal-tb; }
     </style>
 </head>
@@ -78,7 +77,7 @@
             </div>
         );
 
-        // --- 主程式：App (進鈺網頁2 微調版) ---
+        // --- 主程式：App ---
         const App = () => {
             const [activeIndex, setActiveIndex] = useState(null);
             
@@ -120,7 +119,7 @@
                 { title: "防鏽潤滑劑", img: "https://lh3.googleusercontent.com/d/1x3E5haPDzN6kAG6nM11LMTXZ5SD2cXQf", vid: "https://player.cloudinary.com/embed/?cloud_name=dy5batchr&public_id=%E9%98%B2%E9%8F%BD%E6%BD%A4%E6%BB%91_JINN_YUH" },
                 { title: "除垢劑 A1/A2", img: "https://lh3.googleusercontent.com/d/12_Z6HvQlZN1UJ1ZcsqVAIdmvPiaijmV_", vid: "https://player.cloudinary.com/embed/?cloud_name=dy5batchr&public_id=%E9%99%A4%E5%9E%A2%E5%8A%91a1a2_JINN_YUH" },
                 { title: "除垢劑 B52/B3", img: "https://lh3.googleusercontent.com/d/1_iIMbjMXKWRB60fczuHQ9i5B4CM-x6w7", vid: "https://player.cloudinary.com/embed/?cloud_name=dy5batchr&public_id=%E9%99%A4%E5%9E%A2%E5%8A%91b52_JINN_YUH" },
-                { title: "藍丹", img: "https://lh3.googleusercontent.com/d/1sj9xwydtw7xtOBixH2b1fX_2dxmrbffX", vid: "https://player.cloudinary.com/embed/?cloud_name=dy5batchr&public_id=%E8%97%8D%E4%B8%B9_JINN_YUH" }
+                { title: "藍丹", img: "https://lh3.googleusercontent.com/d/1sj9xwydtw7xtOBixH2b1fX_2dxmrbffX", vid: "https://player.cloudinary.com/embed/?cloud_name=dy5batchr&public_id=%E8%97%8D%E4%B8%B9_egvog7" } // 已更新為指定的 Cloudinary 連結
             ];
 
             return (
@@ -193,7 +192,7 @@
                                             <div className="flex flex-col flex-shrink-0">
                                                 {isDefault && <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-6 text-blue-400"><Icon name={s.icon} /></div>}
                                                 <span className={`text-xs font-bold tracking-widest uppercase mb-2 font-mono ${active ? 'text-blue-600' : 'text-blue-500'}`}>{s.model}</span>
-                                                {/* 修改處：移除 writing-vertical 類別，保持橫書 */}
+                                                {/* 橫書排列 */}
                                                 <div className={`font-black uppercase tracking-tighter transition-all duration-500 ${active ? 'text-5xl leading-tight' : 'text-xl md:text-2xl mt-4 md:mt-8 break-keep'}`}>{s.title}</div>
                                             </div>
                                             {active && <motion.p initial={{opacity:0, x:-20}} animate={{opacity:1, x:0}} transition={{delay:0.2}} className="text-slate-600 text-lg max-w-2xl text-left leading-relaxed mt-2">{s.desc}</motion.p>}
@@ -213,7 +212,7 @@
                         </div>
                     </section>
 
-                    {/* Section: Product Application */}
+                    {/* Section: Product Application (12 Items) */}
                     <section ref={appRef} className="py-32 px-8 bg-slate-950 border-y border-white/5 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-0" />
                         <div className="max-w-7xl mx-auto relative z-10">
@@ -257,7 +256,7 @@
                         </div>
                     </section>
 
-                    {/* Section: Product Showcase */}
+                    {/* Section: Product Showcase (更新後的影音展示) */}
                     <section ref={techRef} className="py-32 px-8 max-w-[1400px] mx-auto">
                         <div className="text-center mb-24">
                             <div className="flex items-center justify-center text-blue-500 font-mono text-xs tracking-[0.4em] uppercase mb-6"><div className="w-12 h-[1px] bg-blue-500 mr-4" />Technical Support<div className="w-12 h-[1px] bg-blue-500 ml-4" /></div>
@@ -269,7 +268,12 @@
                                     <img src={item.img} className="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-700 group-hover:opacity-0 group-hover:scale-110" />
                                     <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity"><Icon name="play-circle" size={48} className="text-white opacity-40 group-hover:scale-110 transition-transform duration-500" /></div>
                                     <div className="absolute inset-0 z-0">
-                                        <iframe src={`${item.vid}&autoplay=true&loop=true&muted=true`} className="w-full h-full border-none scale-110" allow="autoplay; fullscreen"></iframe>
+                                        {/* 針對 Cloudinary 連結優化參數銜接邏輯 */}
+                                        <iframe 
+                                            src={`${item.vid}${item.vid.includes('?') ? '&' : '?'}autoplay=1&loop=1&muted=1`} 
+                                            className="w-full h-full border-none scale-110" 
+                                            allow="autoplay; fullscreen"
+                                        ></iframe>
                                     </div>
                                     <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none">
                                         <h3 className="text-white text-xl font-black border-l-4 border-blue-600 pl-4 uppercase tracking-widest">{item.title}</h3>
